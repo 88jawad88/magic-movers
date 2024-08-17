@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Magic movers API
+  version: 1.0.0
+description: This is a simple Book API application made with Express and documented with Swagger
+license:
+  name: MIT
+  url: https://spdx.org/licenses/MIT.html
+contact:
+  email: jawad88halawa@gmail.com
+paths:
+  /api/magic-movers/top:
+    get:
+      summary: Get the top magic movers
+      responses:
+        "200":
+          description: Successful response
+  /api/magic-movers/add:
+    post:
+      summary: Add a new magic mover
+      requestBody:
+        description: Magic mover details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MagicMover"
+      responses:
+        "201":
+          description: Magic mover created successfully
+        "400":
+          description: Magic Mover with this name already exists or failed validation
+  /api/magic-items/add:
+    post:
+      summary: Add a new magic item
+      requestBody:
+        description: Magic item details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MagicItem"
+      responses:
+        "201":
+          description: Magic item created successfully
+        "400":
+          description: Magic Item with this name already exists or failed validation
+
+  /api/magic-movers/load:
+    post:
+      summary: Load a magic mover with an item
+      requestBody:
+        description: Load Items
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoadItems"
+      responses:
+        "200":
+          description: Magic mover loaded successfully
+  /api/magic-movers/start:
+    post:
+      summary: Start a mission for a magic mover
+      requestBody:
+        description: Magic mover ID
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MagicMoverId"
+      responses:
+        "200":
+          description: Mission started successfully
+  /api/magic-movers/end:
+    post:
+      summary: End a mission for a magic mover
+      requestBody:
+        description: Magic mover ID
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MagicMoverId"
+      responses:
+        "200":
+          description: Mission ended successfully
+components:
+  schemas:
+    MagicMover:
+      type: object
+      properties:
+        name:
+          type: string
+        weightLimit:
+          type: number
+    MagicItem:
+      type: object
+      properties:
+        name:
+          type: string
+        weight:
+          type: number
+    LoadItems:
+      type: object
+      properties:
+        moverId:
+          type: string
+        itemId:
+          type: string
+    MagicMoverId:
+      type: object
+      properties:
+        moverId:
+          type: string
